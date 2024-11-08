@@ -1,5 +1,6 @@
 import Hello from './components/Hello';
 import Fruits from './components/Fruits';
+import RenderObjects from './components/RenderObjects';
 
 function App() {
   // Example array of greetings
@@ -13,6 +14,15 @@ function App() {
 
   // Array of fruits to be passed as props
   const fruitList = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+
+  // array of objects
+  const itemsList = [
+    { id: 1, name: "Apple", description: "A sweet red fruit" },
+    { id: 2, name: "Banana", description: "A yellow tropical fruit" },
+    { id: 3, name: "Cherry", description: "A small red stone fruit" },
+    { id: 4, name: "Date", description: "A sweet brown fruit from the date palm" },
+    { id: 5, name: "Elderberry", description: "A dark purple berry used in syrups" },
+  ];
 
   return (
     <div className="App">
@@ -31,6 +41,9 @@ function App() {
       <h1>Welcome to the Fruits App</h1>
       {/* Render the Fruits component with the array of fruits */}
       <Fruits fruits={fruitList} />
+
+      {/* Render the RenderObjects component with the array of items */}
+      <RenderObjects items={itemsList} />
     </div>
   );
 }
