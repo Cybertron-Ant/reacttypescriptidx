@@ -69,17 +69,6 @@ npm run dev
 
 Visit `http://localhost:5173` in your browser. You should see the message "Hello from the Hello Component!" displayed on the page.
 
-### Git Commit
-
-After making these changes, here is a suggested Git commit message:
-
-```
-feat: add Hello component and integrate it into App.tsx
-
-- Created a new Hello component at src/components/Hello.tsx.
-- Replaced the "Hello World" text in App.tsx with the Hello component.
-- Simplified the App structure by using a reusable component.
-```
 
 ### Conclusion
 
