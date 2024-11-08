@@ -1,18 +1,27 @@
 import Hello from './components/Hello';
 
 function App() {
+  // Example array of greetings
+  const greetings = ["Hello", "Hi", "Welcome", "Greetings"];
+
+  // Example user object
+  const user = {
+    name: "Alice",
+    age: 30,
+  };
+
   return (
     <div className="App">
-      {/* Using Hello with a custom greeting, name, and showing an emoji */}
-      <Hello greeting="Welcome" name="Alice" number={100} showEmoji={true} style={{ color: 'blue' }} />
+      {/* Using Hello with an array of greetings and a user object */}
+      <Hello greeting="Welcome to the app!" number={100} showEmoji={true} greetingsArray={greetings} user={user} />
 
-      {/* Using Hello with only a name and default values */}
-      <Hello name="Bob" />
+      {/* Using Hello with only the array of greetings */}
+      <Hello greetingsArray={["Good Morning", "Good Afternoon", "Good Evening"]} />
 
-      {/* Using Hello with custom styles and a hidden emoji */}
-      <Hello greeting="Good day" number={2024} showEmoji={false} style={{ fontSize: '24px', color: 'green' }} />
+      {/* Using Hello with only the user object */}
+      <Hello user={{ name: "Bob", age: 25 }} />
 
-      {/* Using Hello without any props (defaults will be used) */}
+      {/* Using Hello without any additional props (defaults will be used) */}
       <Hello />
     </div>
   );
