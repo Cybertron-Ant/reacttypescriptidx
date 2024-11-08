@@ -1,4 +1,5 @@
 import Hello from './components/Hello';
+import Fruits from './components/Fruits';
 
 function App() {
   // Example array of greetings
@@ -9,6 +10,9 @@ function App() {
     name: "Alice",
     age: 30,
   };
+
+  // Array of fruits to be passed as props
+  const fruitList = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
 
   return (
     <div className="App">
@@ -23,6 +27,10 @@ function App() {
 
       {/* Using Hello without any additional props (defaults will be used) */}
       <Hello />
+
+      <h1>Welcome to the Fruits App</h1>
+      {/* Render the Fruits component with the array of fruits */}
+      <Fruits fruits={fruitList} />
     </div>
   );
 }
