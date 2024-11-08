@@ -1,6 +1,7 @@
 import Hello from './components/Hello';
 import Fruits from './components/Fruits';
 import RenderObjects from './components/RenderObjects';
+import LoopComponent from './components/LoopComponent';
 
 function App() {
   // Example array of greetings
@@ -44,6 +45,10 @@ function App() {
 
       {/* Render the RenderObjects component with the array of items */}
       <RenderObjects items={itemsList} />
+
+      <h1>Welcome to the Loop Component App</h1>
+      {/* Render LoopComponent with a count of 5 and a custom message */}
+      <LoopComponent count={5} message="This is a looped child component" />
     </div>
   );
 }
