@@ -101,19 +101,6 @@ export default App;
 - We import and render the `EmployeeStatusManager` component in `App.tsx`.
 - This demonstrates how to manage employee state and update it interactively in a React application.
 
-## Git Commit
-
-Here is the suggested Git commit message for the changes made so far:
-
-```
-feat: add EmployeeStatusManager component for state management in HRM app
-
-- Created EmployeeStatusManager.tsx to demonstrate state management using React’s useState hook.
-- Implemented employee status updates with interactive buttons for "Active," "On Leave," and "Terminated" statuses.
-- Used state management to handle real-time updates of employee data in the HRM context.
-- Updated App.tsx to showcase usage of EmployeeStatusManager component.
-- Enhanced interactivity and data handling for better user experience in HRM dashboard.
-```
 
 ## Running the Application
 
@@ -128,5 +115,3 @@ Visit `http://localhost:5173` in your browser. You should see the employee’s n
 ## Conclusion
 
 State management is a fundamental concept in React applications, especially in HRM systems where employee data needs to be updated and reflected in real-time. The `EmployeeStatusManager` component showcases how to effectively use React’s `useState` hook for managing and updating employee status, enhancing the overall user experience and maintainability of the application.
-
-Happy coding!
