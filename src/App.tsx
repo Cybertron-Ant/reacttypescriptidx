@@ -3,6 +3,7 @@ import Fruits from './components/Fruits';
 import RenderObjects from './components/RenderObjects';
 import LoopComponent from './components/LoopComponent';
 import ConditionalComponent from './components/ConditionalComponent';
+import ConditionalElementVariable from './components/ConditionalElementVariable';
 
 function App() {
   // Example array of greetings
@@ -28,6 +29,10 @@ function App() {
 
   // Change this value to test conditional rendering
   const shouldRenderFruits = true;
+
+  // Change these values to test different HTML elements
+  const htmlElementType = 'h3'; // Options: 'h1', 'h2', 'h3', 'p'
+  const displayText = 'This is a conditionally rendered HTML element!';
 
   return (
     <div className="App">
@@ -57,6 +62,10 @@ function App() {
       <h1>Welcome to the Conditional Rendering App</h1>
       {/* Render the ConditionalComponent with the flag for conditional rendering */}
       <ConditionalComponent renderFruits={shouldRenderFruits} />
+
+      <h1>Welcome to the Conditional HTML Element App</h1>
+      {/* Render the ConditionalElementVariable with the specified element type and text */}
+      <ConditionalElementVariable elementType={htmlElementType} text={displayText} />
     </div>
   );
 }
