@@ -2,6 +2,7 @@ import Hello from './components/Hello';
 import Fruits from './components/Fruits';
 import RenderObjects from './components/RenderObjects';
 import LoopComponent from './components/LoopComponent';
+import ConditionalComponent from './components/ConditionalComponent';
 
 function App() {
   // Example array of greetings
@@ -24,6 +25,9 @@ function App() {
     { id: 4, name: "Date", description: "A sweet brown fruit from the date palm" },
     { id: 5, name: "Elderberry", description: "A dark purple berry used in syrups" },
   ];
+
+  // Change this value to test conditional rendering
+  const shouldRenderFruits = true;
 
   return (
     <div className="App">
@@ -49,6 +53,10 @@ function App() {
       <h1>Welcome to the Loop Component App</h1>
       {/* Render LoopComponent with a count of 5 and a custom message */}
       <LoopComponent count={5} message="This is a looped child component" />
+
+      <h1>Welcome to the Conditional Rendering App</h1>
+      {/* Render the ConditionalComponent with the flag for conditional rendering */}
+      <ConditionalComponent renderFruits={shouldRenderFruits} />
     </div>
   );
 }
