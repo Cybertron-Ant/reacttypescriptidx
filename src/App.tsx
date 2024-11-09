@@ -1,9 +1,13 @@
-import Hello from './components/Hello'; // Import the Hello component
+import EmployeeMultiStateManager from './components/EmployeeMultiStateManager';
 
 function App() {
   return (
     <div className="App">
-      <Hello /> {/* Use the Hello component */}
+
+      <h1>Human Resource Management Dashboard</h1>
+      {/* Render the EmployeeMultiStateManager component */}
+      <EmployeeMultiStateManager />
+
     </div>
   );
 }
