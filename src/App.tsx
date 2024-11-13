@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard';
 import { Profile, Settings } from './components/Profile';
 import NotFound from './components/NotFound';
 import Login from './components/Login';
+import './App.css'; // import Tailwind CSS
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
