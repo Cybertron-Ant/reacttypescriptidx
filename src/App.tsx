@@ -1,19 +1,21 @@
-import TernaryComponent from './components/TernaryComponent';
+import React from 'react';
+import ThemeToggle from './components/ThemeToggle';
+import AuthButton from './components/AuthButton';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { AuthProvider } from './contexts/AuthContext';
 
-function App() {
-  // Change these values to test the ternary operator behavior
-  const userLoggedIn = true;
-  const currentUserName = 'Alice';
-
+const App: React.FC = () => {
   return (
-    <div className="App flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <h1 className="text-3xl font-bold text-blue-600 mb-4">
-        Welcome to the Ternary Operator Demo App
-      </h1>
-      {/* Render the TernaryComponent with the specified props */}
-      <TernaryComponent isLoggedIn={userLoggedIn} userName={currentUserName} />
-    </div>
+    <ThemeProvider>
+      <AuthProvider>
+        <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
+          <h1 className="text-2xl font-bold mb-4">React Context API Demo</h1>
+          <ThemeToggle />
+          <AuthButton />
+        </div>
+      </AuthProvider>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
