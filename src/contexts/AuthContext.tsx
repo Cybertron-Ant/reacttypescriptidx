@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useMemo } from 'react';
+import React, { createContext, useContext, useReducer, useMemo, useEffect } from 'react';
 
 type AuthState = { isAuthenticated: boolean };
 type AuthAction = { type: 'LOGIN' | 'LOGOUT' };
@@ -9,6 +9,7 @@ const AuthContext = createContext<{ state: AuthState; login: () => void; logout:
   logout: () => {},
 });
 
+// Reducer function to manage authentication state
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case 'LOGIN':
@@ -20,9 +21,23 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   }
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, { isAuthenticated: false });
+// Helper function to load auth state from local storage
+const loadAuthFromStorage = (): AuthState => {
+  const savedAuth = localStorage.getItem('isAuthenticated');
+  return { isAuthenticated: savedAuth === 'true' };
+};
 
+// Provider component
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Initialize state with local storage value
+  const [state, dispatch] = useReducer(authReducer, loadAuthFromStorage());
+
+  // Update local storage whenever the auth state changes
+  useEffect(() => {
+    localStorage.setItem('isAuthenticated', state.isAuthenticated.toString());
+  }, [state.isAuthenticated]);
+
+  // Memoize the context value for performance
   const value = useMemo(
     () => ({
       state,
@@ -35,4 +50,5 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
+// Custom hook to use the AuthContext
 export const useAuth = () => useContext(AuthContext);
