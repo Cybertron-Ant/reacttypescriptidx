@@ -1,63 +1,111 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/main.css';
-import TernaryComponent from './components/TernaryComponent';
+import ConfirmDialog from './components/inheritance/ConfirmDialog';
+import Dialog, {
+  DialogHeader,
+  DialogContent,
+  DialogFooter,
+} from './components/composition/Dialog';
 
 /**
- * Main App component demonstrating Tailwind CSS usage
- * This component showcases various Tailwind utility classes and custom components
+ * Main App component demonstrating the difference between
+ * Inheritance and Composition patterns in React
  */
 function App() {
-
-  // Change these values to test the ternary operator behavior
-  const userLoggedIn = true;
-  const currentUserName = 'Alice';
+  // State for managing dialog visibility
+  const [showInheritanceDialog, setShowInheritanceDialog] = useState(false);
+  const [showCompositionDialog, setShowCompositionDialog] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-
-      {/* Header section with custom styling */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          <h1 className="text-primary-600">Welcome to the Ternary Operator Demo App</h1>
-        </div>
+    <div className="min-h-screen bg-gray-50 p-8">
+      <header className="max-w-4xl mx-auto mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          Composition vs Inheritance in React
+        </h1>
+        <p className="text-gray-600">
+          This example demonstrates two different approaches to building reusable
+          components in React: Inheritance and Composition.
+        </p>
       </header>
 
-      {/* Main content section */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Example card using custom component class */}
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4">Getting Started with Tailwind and Ternary Operator</h2>
-          <p className="text-gray-600 mb-4">
-            This is an example of how to use Tailwind CSS in your React application.
-          </p>
-          {/* Render the TernaryComponent with the specified props */}
-          <TernaryComponent isLoggedIn={userLoggedIn} userName={currentUserName} />
-          {/* Example button using custom component class */}
-          <button className="btn-primary">
-            Learn More
-          </button>
+      <main className="max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Inheritance Example */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4">Inheritance Pattern</h2>
+            <p className="text-gray-600 mb-4">
+              Uses classical inheritance to extend a base dialog component.
+            </p>
+            <button
+              onClick={() => setShowInheritanceDialog(true)}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Show Inheritance Dialog
+            </button>
+          </div>
+
+          {/* Composition Example */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4">Composition Pattern</h2>
+            <p className="text-gray-600 mb-4">
+              Uses component composition to build flexible, reusable components.
+            </p>
+            <button
+              onClick={() => setShowCompositionDialog(true)}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Show Composition Dialog
+            </button>
+          </div>
         </div>
 
-        {/* Grid layout example */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {/* Feature cards */}
-          {[1, 2, 3].map((item) => (
-            <div key={item} className="card hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-xl font-semibold mb-2">Feature {item}</h3>
-              <p className="text-gray-600">
-                This is a feature card that demonstrates responsive design and hover effects.
-              </p>
-            </div>
-          ))}
-        </div>
+        {/* Inheritance-based Dialog */}
+        {showInheritanceDialog && (
+          <ConfirmDialog
+            title="Inheritance Example"
+            content="This dialog extends a base dialog component using inheritance.
+                    It overrides the footer to add a confirm button."
+            onClose={() => setShowInheritanceDialog(false)}
+            onConfirm={() => {
+              alert('Confirmed!');
+              setShowInheritanceDialog(false);
+            }}
+          />
+        )}
+
+        {/* Composition-based Dialog */}
+        <Dialog
+          isOpen={showCompositionDialog}
+          onClose={() => setShowCompositionDialog(false)}
+        >
+          <DialogHeader>
+            <h2 className="text-lg font-semibold">Composition Example</h2>
+          </DialogHeader>
+          <DialogContent>
+            <p>
+              This dialog is built using composition. Each part is a separate
+              component that can be easily customized and reused.
+            </p>
+          </DialogContent>
+          <DialogFooter>
+            <button
+              onClick={() => setShowCompositionDialog(false)}
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                alert('Confirmed!');
+                setShowCompositionDialog(false);
+              }}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            >
+              Confirm
+            </button>
+          </DialogFooter>
+        </Dialog>
       </main>
-
-      {/* Footer section */}
-      <footer className="bg-gray-800 text-white mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <p className="text-center">&copy; 2024 Your Company. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 }
