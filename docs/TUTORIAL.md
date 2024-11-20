@@ -199,3 +199,162 @@ Need help? Check out:
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [React TypeScript Documentation](https://www.typescriptlang.org/docs/handbook/react.html)
 - [PostCSS Documentation](https://postcss.org/)
+
+# HR Events Module Tutorial
+
+This tutorial will guide you through using the HR Events Management feature step by step.
+
+## Table of Contents
+1. [Viewing Events](#viewing-events)
+2. [Creating an Event](#creating-an-event)
+3. [Managing Event Status](#managing-event-status)
+4. [Best Practices](#best-practices)
+
+## Viewing Events
+
+The Events page displays all your HR events in a clean, grid layout. Each event card shows:
+- Event title
+- Description
+- Date and time
+- Location
+- Number of attendees
+- Status indicator
+
+### Filtering Events
+*Coming soon*
+
+## Creating an Event
+
+1. Click the "Create New Event" button in the top-right corner
+2. Fill in the event details:
+   - Title (required)
+   - Description
+   - Date and time
+   - Location
+   - Event type (select from dropdown)
+   - Status
+
+### Example: Creating a Training Event
+
+1. Click "Create New Event"
+2. Enter details:
+   ```
+   Title: Q2 React Training
+   Description: Hands-on React training for new developers
+   Date: [Select tomorrow's date]
+   Time: 10:00 AM
+   Location: Conference Room A
+   Type: TRAINING
+   Status: SCHEDULED
+   ```
+3. Click "Create Event"
+
+## Managing Event Status
+
+Events can have the following statuses:
+- `SCHEDULED`: Default status for new events
+- `IN_PROGRESS`: Event is currently happening
+- `COMPLETED`: Event has finished
+- `CANCELLED`: Event was cancelled
+
+### Updating Event Status
+
+1. Find the event in the list
+2. Click the status indicator
+3. Select the new status from the dropdown
+4. Status will update with corresponding color:
+   - Blue: Scheduled
+   - Yellow: In Progress
+   - Green: Completed
+   - Red: Cancelled
+
+## Best Practices
+
+### Event Naming
+Use clear, descriptive names:
+- "Q2 2024 Performance Reviews"
+- "Meeting"
+
+### Time Management
+- Schedule events during business hours
+- Consider time zones for remote attendees
+- Add buffer time before and after
+
+### Description Guidelines
+Include:
+- Purpose of the event
+- Required preparations
+- Contact person
+- Any special instructions
+
+Example:
+```
+Quarterly performance review meetings for the Engineering team.
+Please prepare:
+- Q2 goals review
+- Project highlights
+- Growth areas
+
+Contact: john.doe@company.com
+```
+
+## Tips & Tricks
+
+1. **Quick Create**
+   - Use keyboard shortcut `Ctrl + N` to open new event form
+   - Tab through fields for quick entry
+
+2. **Event Templates**
+   *Coming soon*
+   - Save common event types as templates
+   - Quick-fill forms with template data
+
+3. **Bulk Operations**
+   *Coming soon*
+   - Select multiple events
+   - Update status in bulk
+   - Export selected events
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Event Not Showing**
+   - Refresh the page
+   - Check if you have the correct permissions
+   - Verify the event status isn't "CANCELLED"
+
+2. **Can't Create Event**
+   - All required fields must be filled
+   - Date must be in the future
+   - Time must be in correct format
+
+### Getting Help
+
+If you encounter any issues:
+1. Check this documentation
+2. Contact HR system administrator
+3. Submit a support ticket
+
+## Next Steps
+
+After mastering the basics, try:
+1. Creating recurring events
+2. Managing attendee lists
+3. Exporting event reports
+4. Setting up event notifications
+
+## Upcoming Features
+
+Stay tuned for:
+- Calendar view
+- Event templates
+- Attendee management
+- Email notifications
+- Mobile app support
+
+## Feedback
+
+We're constantly improving! Send your feedback to:
+- Email: support@company.com
+- Internal ticket: #hr-events-feedback
