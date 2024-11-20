@@ -9,6 +9,7 @@ This tutorial will guide you through using Tailwind CSS in your React TypeScript
 4. [Custom Components](#custom-components)
 5. [Advanced Patterns](#advanced-patterns)
 6. [Troubleshooting](#troubleshooting)
+7. [Functional Components](#functional-components)
 
 ## Getting Started
 
@@ -168,6 +169,58 @@ module.exports = {
     Hover the parent to see this change
   </h2>
 </div>
+```
+
+## Functional Components
+
+### 1. Define TypeScript Interfaces
+Always define interfaces for your props:
+
+```typescript
+interface Feature {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface FeatureGridProps {
+  features: Feature[];
+}
+```
+
+### 2. Implement Functional Components
+Use the React.FC type and implement the component:
+
+```tsx
+const FeatureGrid: React.FC<FeatureGridProps> = ({ features }) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((feature) => (
+        <FeatureCard
+          key={feature.id}
+          title={feature.title}
+          description={feature.description}
+        />
+      ))}
+    </div>
+  );
+};
+```
+
+### 3. Add Component Documentation
+Use JSDoc comments for better documentation:
+
+```tsx
+/**
+ * FeatureGrid Component
+ * 
+ * Displays a responsive grid of feature cards
+ * 
+ * @component
+ * @param {Object} props - Component props
+ * @param {Feature[]} props.features - Array of features to display
+ */
+const FeatureGrid: React.FC<FeatureGridProps> = ...
 ```
 
 ## Troubleshooting
