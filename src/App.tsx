@@ -1,19 +1,13 @@
-import TernaryComponent from './components/TernaryComponent';
+/**
+ * Main Application Component
+ * Initializes the TanStack Router and provides the routing context
+ */
+
+import { RouterProvider } from '@tanstack/react-router'
+import { router } from './router'
 
 function App() {
-
-  // Change these values to test the ternary operator behavior
-  const userLoggedIn = true;
-  const currentUserName = 'Alice';
-
-  return (
-    <div className="App">
-
-      <h1>Welcome to the Ternary Operator Demo App</h1>
-      {/* Render the TernaryComponent with the specified props */}
-      <TernaryComponent isLoggedIn={userLoggedIn} userName={currentUserName} />
-    </div>
-  );
+  return <RouterProvider router={router} />
 }
 
-export default App;
+export default App
