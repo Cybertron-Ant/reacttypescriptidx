@@ -1,50 +1,115 @@
-# React + TypeScript + Vite
+# HR Management System Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+The HR Management System is a modern React application built with TypeScript that demonstrates best practices in React Hooks usage, state management, and component architecture. This system provides a comprehensive solution for managing employee data with features like filtering, searching, and basic CRUD operations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Documentation
 
-## Expanding the ESLint configuration
+- [Technical Documentation](docs/hr-system/TECHNICAL.md) - Detailed implementation details and code examples
+- [Tutorial](docs/hr-system/TUTORIAL.md) - Step-by-step guide to building the system
+- [API Documentation](docs/hr-system/API.md) - API endpoints and usage
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Table of Contents
 
-- Configure the top-level `parserOptions` property like this:
+1. [Features](#features)
+2. [Technology Stack](#technology-stack)
+3. [Project Structure](#project-structure)
+4. [Getting Started](#getting-started)
+5. [Architecture](#architecture)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Features
+
+- 👥 Employee Management
+  - View employee list with details
+  - Filter employees by status
+  - Search employees by name
+  - Delete employees
+- 📊 Statistics Dashboard
+  - Total employees count
+  - Active employees count
+  - Average salary calculation
+- 🎯 Best Practices Implementation
+  - Custom hooks
+  - Context API
+  - TypeScript integration
+  - Performance optimization
+
+## Technology Stack
+
+- React 18+
+- TypeScript
+- Tailwind CSS
+- Context API for state management
+- Custom Hooks for business logic
+
+## Project Structure
+
+```
+src/
+├── context/
+│   └── HRContext.tsx       # Global state management
+├── features/
+│   └── employees/
+│       └── EmployeeList.tsx # Main employee management component
+├── hooks/
+│   └── useEmployees.ts     # Custom hook for employee operations
+├── types/
+│   └── hr.types.ts         # TypeScript interfaces
+├── styles/
+│   └── main.css           # Global styles
+└── App.tsx                # Root component
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+For detailed setup instructions and examples, check out our [Tutorial](docs/hr-system/TUTORIAL.md).
+
+## Architecture
+
+### Context Layer
+
+The application uses React Context API for global state management. The `HRContext` provides:
+- Employee data
+- Loading states
+- Error handling
+- CRUD operations
+
+For detailed implementation, see our [Technical Documentation](docs/hr-system/TECHNICAL.md#context-implementation).
+
+### Custom Hooks
+
+`useEmployees` hook encapsulates:
+- Employee state management
+- CRUD operations
+- Data filtering
+- Performance optimizations
+
+For hook implementation details, see our [Technical Documentation](docs/hr-system/TECHNICAL.md#react-hooks-implementation-details).
+
+### Components
+
+Components follow a hierarchical structure:
+- App.tsx (Root component)
+  - HRProvider (Context wrapper)
+    - EmployeeList (Main feature component)
+
+### Type Safety
+
+The system uses TypeScript interfaces for:
+- Employee data
+- Department data
+- Context types
+- Filter options
+
+For complete type definitions, see our [Technical Documentation](docs/hr-system/TECHNICAL.md#type-definitions).
