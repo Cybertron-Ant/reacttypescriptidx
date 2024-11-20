@@ -135,7 +135,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'primary', children }) => {
 ```tsx
 const isDark = true;
 
-<div className={`
+<div className={` 
   ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}
   p-4 rounded-lg
 `}>
@@ -199,3 +199,259 @@ Need help? Check out:
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [React TypeScript Documentation](https://www.typescriptlang.org/docs/handbook/react.html)
 - [PostCSS Documentation](https://postcss.org/)
+
+## HR Management System - Tutorial
+
+## Introduction
+This tutorial will guide you through building a React TypeScript application with Higher Order Components (HOCs) for authentication, data fetching, and permissions management.
+
+## Prerequisites
+- Node.js 14+
+- npm or yarn
+- Basic knowledge of React and TypeScript
+- Code editor (VS Code recommended)
+
+## Step 1: Project Setup
+
+1. Create a new React TypeScript project:
+```bash
+npm create vite@latest my-hr-system -- --template react-ts
+cd my-hr-system
+npm install
+```
+
+2. Install required dependencies:
+```bash
+npm install react-router-dom @types/react-router-dom
+```
+
+## Step 2: Create Authentication Context
+
+1. Create `src/context/AuthContext.tsx`:
+```typescript
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+
+interface AuthContextType {
+  isAuthenticated: boolean;
+  userRole: string;
+  login: (username: string) => void;
+  logout: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export const AuthProvider: React.FC<ReactNode> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState('');
+
+  const login = (username: string) => {
+    setIsAuthenticated(true);
+    setUserRole('HR_ADMIN');
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    setUserRole('');
+  };
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, userRole, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+```
+
+## Step 3: Implement Higher Order Components
+
+1. Create `src/hoc/withAuthentication.tsx`:
+```typescript
+import React, { ComponentType } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
+export interface WithAuthenticationProps {
+  isAuthenticated: boolean;
+  userRole: string;
+  userName: string;
+}
+
+export const withAuthentication = <P extends object>(
+  WrappedComponent: ComponentType<P & WithAuthenticationProps>,
+  requiredRole?: string
+) => {
+  return (props: Omit<P, keyof WithAuthenticationProps>) => {
+    const { isAuthenticated, userRole } = useAuth();
+
+    if (!isAuthenticated) {
+      return <Navigate to="/login" replace />;
+    }
+
+    if (requiredRole && userRole !== requiredRole) {
+      return <Navigate to="/unauthorized" replace />;
+    }
+
+    return (
+      <WrappedComponent
+        {...(props as P)}
+        isAuthenticated={isAuthenticated}
+        userRole={userRole}
+        userName="John Doe"
+      />
+    );
+  };
+};
+```
+
+2. Create `src/hoc/withDataFetching.tsx` and `src/hoc/withPermissions.tsx` similarly.
+
+## Step 4: Create Components
+
+1. Create `src/components/Login.tsx`:
+```typescript
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
+const Login: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(username);
+    navigate('/employees');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
+    </form>
+  );
+};
+
+export default Login;
+```
+
+## Step 5: Set Up Routing
+
+1. Update `src/App.tsx`:
+```typescript
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import Login from './components/Login';
+import EmployeeList from './components/EmployeeList';
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/employees" element={<EmployeeList />} />
+          <Route path="/" element={<Navigate to="/employees" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+}
+
+export default App;
+```
+
+## Step 6: Testing the Application
+
+1. Start the development server:
+```bash
+npm run dev
+```
+
+2. Test the authentication flow:
+   - Visit http://localhost:5173
+   - You should be redirected to login
+   - Enter any credentials
+   - You should see the employee list
+
+## Common Issues and Solutions
+
+### Authentication Issues
+- Problem: Infinite redirect loop
+- Solution: Check AuthContext implementation and provider wrapping
+
+### Permission Issues
+- Problem: Cannot access protected routes
+- Solution: Verify role assignment in login function
+
+### Data Fetching Issues
+- Problem: Data not loading
+- Solution: Check fetch function implementation and error handling
+
+## Next Steps
+
+1. Add more features:
+   - User profile management
+   - Employee CRUD operations
+   - Department management
+
+2. Enhance security:
+   - Implement proper authentication
+   - Add token management
+   - Secure API calls
+
+3. Improve UI:
+   - Add loading animations
+   - Enhance error messages
+   - Implement responsive design
+
+## Best Practices
+
+1. Component Organization:
+   - Keep HOCs in separate directory
+   - Use consistent naming conventions
+   - Maintain clear component hierarchy
+
+2. Type Safety:
+   - Define interfaces for all props
+   - Use proper TypeScript configurations
+   - Implement proper error boundaries
+
+3. Performance:
+   - Implement proper memoization
+   - Use React.memo where appropriate
+   - Optimize re-renders
+
+## Resources
+
+- [React Documentation](https://reactjs.org/)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [React Router Documentation](https://reactrouter.com/)
+
+## Support
+
+For issues and questions:
+- Create an issue in the repository
+- Check existing documentation
+- Contact the development team

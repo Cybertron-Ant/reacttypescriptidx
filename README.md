@@ -1,50 +1,104 @@
-# React + TypeScript + Vite
+# HR Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern HR Management System built with React and TypeScript, featuring advanced component enhancement through Higher Order Components (HOCs).
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Authentication System**: Secure user authentication with role-based access control
+- **Permission Management**: Granular permission control at component level
+- **Data Fetching**: Centralized data management with loading and error states
+- **Type Safety**: Full TypeScript support throughout the application
+- **Modern UI**: Clean and responsive interface using Tailwind CSS
 
-## Expanding the ESLint configuration
+## 📚 Documentation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [HOC Guide](docs/HOC-GUIDE.md) - Comprehensive guide to using Higher Order Components
+- [Architecture](docs/ARCHITECTURE.md) - System architecture and technical design
+- [Technical Documentation](docs/TECHNICAL.md) - Detailed technical specifications
+- [Tutorial](docs/TUTORIAL.md) - Step-by-step implementation guide
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠 Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- TypeScript 5+
+- React 18+
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd reacttypescriptidx
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
 ```
+
+3. Start the development server:
+```bash
+npm start
+# or
+yarn start
+```
+
+## 🏗 Project Structure
+
+```
+src/
+├── components/
+│   ├── common/          # Shared components
+│   ├── employees/       # Employee management components
+│   └── auth/           # Authentication components
+├── context/
+│   └── AuthContext.tsx  # Authentication context
+├── hoc/
+│   ├── withAuthentication.tsx
+│   ├── withDataFetching.tsx
+│   └── withPermissions.tsx
+└── types/              # TypeScript type definitions
+```
+
+## 🔒 Security
+
+- Role-based access control
+- Protected routes
+- Secure authentication flow
+- Permission-based feature access
+
+## 🧪 Testing
+
+Run the test suite:
+```bash
+npm test
+# or
+yarn test
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙋‍♂️ Support
+
+For support, please open an issue in the repository or contact the development team.
+
+## 🌟 Acknowledgments
+
+- React team for the amazing framework
+- TypeScript team for type safety
+- All contributors who have helped shape this project
