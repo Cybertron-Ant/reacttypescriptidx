@@ -1,50 +1,119 @@
-# React + TypeScript + Vite
+# Employee Status Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+The Employee Status Management System is a React application built with TypeScript that demonstrates best practices in React Hooks usage and state management. This system focuses on managing employee statuses efficiently with a clean and intuitive interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## Expanding the ESLint configuration
+1. [Features](#features)
+2. [Technology Stack](#technology-stack)
+3. [Project Structure](#project-structure)
+4. [Getting Started](#getting-started)
+5. [Documentation](#documentation)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- 👥 Employee Status Management
+  - View employee status list
+  - Update employee statuses
+  - Real-time status tracking
+  - Status history
+- 🎯 React Best Practices
+  - Custom hooks for status management
+  - TypeScript for type safety
+  - Component-based architecture
+  - Performance optimized rendering
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Technology Stack
+
+- React 18+
+- TypeScript
+- Vite
+- ESLint for code quality
+- Modern JavaScript features
+
+## Project Structure
+
+```
+src/
+├── components/
+│   └── EmployeeStatusManager/
+│       ├── index.tsx
+│       ├── StatusList.tsx
+│       └── StatusUpdate.tsx
+├── hooks/
+│   └── useEmployeeStatus.ts
+├── types/
+│   └── employee.types.ts
+└── App.tsx
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Documentation
+
+- [Technical Documentation](./docs/employee-status/TECHNICAL.md) - Detailed implementation details
+- [Tutorial](./docs/employee-status/TUTORIAL.md) - Step-by-step guide to building features
+
+## Component Architecture
+
+### EmployeeStatusManager
+
+The main component that orchestrates employee status management:
+- Status display
+- Status updates
+- History tracking
+
+### Status Updates
+
+Status updates are handled through:
+- Real-time state management
+- Optimistic updates
+- Error handling
+- History tracking
+
+## Type Safety
+
+The system implements TypeScript for:
+- Employee data structures
+- Status enums
+- Component props
+- Hook return types
+
+## Best Practices
+
+1. **State Management**
+   - Single source of truth
+   - Immutable state updates
+   - Proper state initialization
+
+2. **Performance**
+   - Memoization where needed
+   - Efficient re-renders
+   - Proper dependency management
+
+3. **Code Organization**
+   - Feature-based structure
+   - Clear component hierarchy
+   - Separated business logic
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+
+## License
+
+MIT License
