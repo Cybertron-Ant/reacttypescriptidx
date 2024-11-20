@@ -48,3 +48,46 @@ export default tseslint.config({
   },
 })
 ```
+
+## Testing Implementation
+
+This project uses React Testing Library for component testing. The testing setup includes:
+
+### Testing Stack
+- Jest as the test runner
+- React Testing Library for component testing
+- TypeScript support for type-safe tests
+- JSDOM for DOM manipulation in tests
+
+### Test Structure
+Tests are co-located with their components:
+```
+src/
+  components/
+    ComponentName/
+      ComponentName.tsx
+      ComponentName.test.tsx
+      README.md
+```
+
+### Running Tests
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm test -- --watch
+
+# Run tests with coverage
+npm test -- --coverage
+```
+
+### Example Components
+- [Counter Component](src/components/Counter/README.md) - A fully tested React component demonstrating testing best practices
+
+### Testing Best Practices
+1. Test component behavior, not implementation
+2. Use semantic queries (getByRole, getByText) over testId when possible
+3. Write tests that resemble how users interact with components
+4. Include both happy path and edge cases
+5. Keep tests maintainable and readable
