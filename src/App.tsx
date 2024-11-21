@@ -1,19 +1,17 @@
 import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, Container } from '@mui/material';
 import { theme } from './theme/theme';
-import { MainLayout } from './components/layout/MainLayout';
-import { Dashboard } from './components/features/Dashboard';
+import { Navbar } from './components/layout/Navbar';
+import { ContactForm } from './components/forms/ContactForm';
 
 function App() {
-
-  // Change these values to test the ternary operator behavior
-  const userLoggedIn = true;
-  const currentUserName = 'Alice';
-
   return (
     <ThemeProvider theme={theme}>
-      <MainLayout>
-        <Dashboard />
-      </MainLayout>
+      <CssBaseline />
+      <Navbar />
+      <Container maxWidth="lg" sx={{ mt: 4 }}>
+        <ContactForm />
+      </Container>
     </ThemeProvider>
   );
 }
