@@ -1,19 +1,23 @@
-import TernaryComponent from './components/TernaryComponent';
+import { ChakraProvider } from '@chakra-ui/react'
+import theme from './theme'
+import MainLayout from './layouts/MainLayout'
+import Welcome from './components/Welcome'
 
+/**
+ * Main App component that sets up ChakraProvider and renders the application
+ * Uses custom theme and MainLayout for consistent styling
+ */
 function App() {
-
-  // Change these values to test the ternary operator behavior
-  const userLoggedIn = true;
-  const currentUserName = 'Alice';
-
   return (
-    <div className="App">
-
-      <h1>Welcome to the Ternary Operator Demo App</h1>
-      {/* Render the TernaryComponent with the specified props */}
-      <TernaryComponent isLoggedIn={userLoggedIn} userName={currentUserName} />
-    </div>
-  );
+    <ChakraProvider theme={theme}>
+      <MainLayout>
+        <Welcome 
+          title="Welcome to Your React + TypeScript App" 
+          subtitle="Powered by Chakra UI for beautiful, accessible components"
+        />
+      </MainLayout>
+    </ChakraProvider>
+  )
 }
 
-export default App;
+export default App
