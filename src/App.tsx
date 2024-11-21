@@ -1,4 +1,7 @@
-import TernaryComponent from './components/TernaryComponent';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './theme/theme';
+import { MainLayout } from './components/layout/MainLayout';
+import { Dashboard } from './components/features/Dashboard';
 
 function App() {
 
@@ -7,12 +10,11 @@ function App() {
   const currentUserName = 'Alice';
 
   return (
-    <div className="App">
-
-      <h1>Welcome to the Ternary Operator Demo App</h1>
-      {/* Render the TernaryComponent with the specified props */}
-      <TernaryComponent isLoggedIn={userLoggedIn} userName={currentUserName} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <MainLayout>
+        <Dashboard />
+      </MainLayout>
+    </ThemeProvider>
   );
 }
 
