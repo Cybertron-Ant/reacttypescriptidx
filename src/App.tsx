@@ -1,7 +1,7 @@
-import { ChakraProvider } from '@chakra-ui/react'
-import theme from './theme'
-import MainLayout from './layouts/MainLayout'
-import Welcome from './components/Welcome'
+import { Box, ChakraProvider } from "@chakra-ui/react"
+import theme from "./theme"
+import MainLayout from "./layouts/MainLayout"
+import ContactForm from "./components/Form/ContactForm"
 
 /**
  * Main App component that sets up ChakraProvider and renders the application
@@ -11,10 +11,14 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <MainLayout>
-        <Welcome 
-          title="Welcome to Your React + TypeScript App" 
-          subtitle="Powered by Chakra UI for beautiful, accessible components"
-        />
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          minH="calc(100vh - 200px)"
+        >
+          <ContactForm />
+        </Box>
       </MainLayout>
     </ChakraProvider>
   )
