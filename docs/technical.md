@@ -1,6 +1,16 @@
 # Technical Documentation
 
-## Architecture Overview
+## 📋 Table of Contents
+- [Architecture Overview](#architecture-overview)
+- [Component Design](#component-design)
+- [State Management](#state-management)
+- [Form Validation](#form-validation)
+- [Performance Optimization](#performance-optimization)
+- [Security Considerations](#security-considerations)
+- [Testing Strategy](#testing-strategy)
+- [Error Handling](#error-handling)
+
+## 🏗️ Architecture Overview
 
 Our Material UI implementation follows a modular, component-based architecture with clear separation of concerns and TypeScript integration.
 
@@ -11,20 +21,26 @@ Our Material UI implementation follows a modular, component-based architecture w
 - Material UI v5
 - Emotion (for styled components)
 
-### Directory Structure
-
+### Project Structure
 ```
 src/
-├── components/          # React components
+├── components/      # Reusable UI components
 │   ├── layout/         # Layout components
 │   ├── common/         # Reusable components
 │   └── features/       # Feature-specific components
-├── theme/              # Theme configuration
-├── utils/              # Utility functions
-└── types/              # TypeScript type definitions
+├── theme/          # Material-UI theme customization
+├── types/          # TypeScript type definitions
+├── utils/          # Helper functions
+└── App.tsx         # Application entry point
 ```
 
-## Component Architecture
+### Design Patterns
+- Component-based architecture
+- Atomic design principles
+- Container/Presenter pattern
+- Custom hooks for logic reuse
+
+## 🧩 Component Design
 
 ### MainLayout Component
 
@@ -48,91 +64,126 @@ export const MainLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
 };
 ```
 
-### Theme Configuration
-
-The theme is centrally managed in `theme.ts`:
-
+### Navbar Component
 ```typescript
-export const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1976d2',
-      // ...
-    },
-    // ...
-  },
-  typography: {
-    // ...
-  },
-  components: {
-    // Component overrides
-  },
-});
-```
-
-## Type Safety
-
-### Component Props
-
-All components use TypeScript interfaces for prop definitions:
-
-```typescript
-interface DashboardProps {
+interface NavbarProps {
+  onMenuClick?: () => void;
   title?: string;
-  items: Array<{
-    id: string;
-    title: string;
-    content: string;
+  menuItems?: Array<{
+    label: string;
+    path: string;
   }>;
 }
 ```
 
-### Theme Customization
-
-Theme types are extended using TypeScript declaration merging:
-
+### Form Component
 ```typescript
-declare module '@mui/material/styles' {
-  interface Theme {
-    custom: {
-      // Custom theme properties
-    };
-  }
+interface FormValues {
+  name: string;
+  email: string;
+}
+
+interface FormProps {
+  onSubmit: (values: FormValues) => Promise<void>;
+  initialValues?: Partial<FormValues>;
 }
 ```
 
-## Performance Considerations
+## 🔄 State Management
 
-1. Component Memoization
-   - Use React.memo for expensive components
-   - Implement useMemo for complex calculations
+### Form State
+```typescript
+const formik = useFormik({
+  initialValues,
+  validationSchema,
+  onSubmit: async (values) => {
+    try {
+      await onSubmit(values);
+    } catch (error) {
+      handleError(error);
+    }
+  }
+});
+```
 
-2. Code Splitting
-   - Lazy loading for routes
-   - Dynamic imports for heavy components
+## ✅ Form Validation
 
-3. Theme Optimization
-   - Minimal CSS-in-JS usage
-   - Proper use of sx prop vs styled components
+### Validation Schema
+```typescript
+const validationSchema = yup.object({
+  name: yup
+    .string()
+    .min(2, 'Name must be at least 2 characters')
+    .required('Name is required'),
+  email: yup
+    .string()
+    .email('Invalid email format')
+    .required('Email is required')
+});
+```
 
-## Testing Strategy
+## 🚀 Performance Optimization
 
-1. Unit Tests
-   - Component rendering
-   - User interactions
-   - Theme application
+### Rendering Optimization
+```typescript
+// Memoization example
+const MemoizedComponent = React.memo(({ data }) => (
+  <div>{data.map(renderItem)}</div>
+));
 
-2. Integration Tests
-   - Component composition
-   - Theme inheritance
-   - Layout responsiveness
+// Custom hooks for expensive calculations
+const useExpensiveCalculation = (data: Data) => {
+  return React.useMemo(() => calculate(data), [data]);
+};
+```
 
-## Security Considerations
+## 🔒 Security Considerations
 
-1. Input Sanitization
-2. XSS Prevention
-3. Proper prop validation
-4. Type checking
+### Input Validation
+- Client-side validation with Yup
+- Server-side validation
+- XSS prevention
+
+### Data Handling
+```typescript
+// Sanitize user input
+const sanitizeInput = (input: string): string => {
+  return DOMPurify.sanitize(input);
+};
+```
+
+## 🧪 Testing Strategy
+
+### Unit Tests
+```typescript
+describe('ContactForm', () => {
+  it('validates required fields', () => {
+    render(<ContactForm />);
+    fireEvent.click(screen.getByText('Submit'));
+    expect(screen.getByText('Name is required')).toBeInTheDocument();
+  });
+});
+```
+
+## 🚨 Error Handling
+
+### Error Boundaries
+```typescript
+class ErrorBoundary extends React.Component {
+  state = { hasError: false };
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <ErrorFallback />;
+    }
+    return this.props.children;
+  }
+}
+```
 
 ## Deployment
 
