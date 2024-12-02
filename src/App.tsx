@@ -1,64 +1,50 @@
-import React from 'react';
-import './styles/main.css';
-import TernaryComponent from './components/TernaryComponent';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Provider } from 'react-redux';
+import { store } from './features/dragDrop/store';
+import { DraggableItem } from './features/dragDrop/components/DraggableItem';
+import { DropZone } from './features/dragDrop/components/DropZone';
 
-/**
- * Main App component demonstrating Tailwind CSS usage
- * This component showcases various Tailwind utility classes and custom components
- */
 function App() {
-
-  // Change these values to test the ternary operator behavior
-  const userLoggedIn = true;
-  const currentUserName = 'Alice';
+  // Sample items that can be dragged
+  const items = [
+    { id: '1', text: 'Item 1' },
+    { id: '2', text: 'Item 2' },
+    { id: '3', text: 'Item 3' },
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <Provider store={store}>
+      <DndProvider backend={HTML5Backend}>
+        <div className="min-h-screen bg-gray-100 p-8">
+          <div className="max-w-2xl mx-auto">
+            <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
+              Drag and Drop Demo
+            </h1>
+            
+            <div className="grid grid-cols-2 gap-8">
+              {/* Draggable items section */}
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h2 className="text-xl font-semibold mb-4 text-gray-700">
+                  Draggable Items
+                </h2>
+                {items.map((item) => (
+                  <DraggableItem key={item.id} id={item.id} text={item.text} />
+                ))}
+              </div>
 
-      {/* Header section with custom styling */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          <h1 className="text-primary-600">Welcome to the Ternary Operator Demo App</h1>
-        </div>
-      </header>
-
-      {/* Main content section */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Example card using custom component class */}
-        <div className="card">
-          <h2 className="text-2xl font-bold mb-4">Getting Started with Tailwind and Ternary Operator</h2>
-          <p className="text-gray-600 mb-4">
-            This is an example of how to use Tailwind CSS in your React application.
-          </p>
-          {/* Render the TernaryComponent with the specified props */}
-          <TernaryComponent isLoggedIn={userLoggedIn} userName={currentUserName} />
-          {/* Example button using custom component class */}
-          <button className="btn-primary">
-            Learn More
-          </button>
-        </div>
-
-        {/* Grid layout example */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {/* Feature cards */}
-          {[1, 2, 3].map((item) => (
-            <div key={item} className="card hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-xl font-semibold mb-2">Feature {item}</h3>
-              <p className="text-gray-600">
-                This is a feature card that demonstrates responsive design and hover effects.
-              </p>
+              {/* Drop zone section */}
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h2 className="text-xl font-semibold mb-4 text-gray-700">
+                  Drop Zone
+                </h2>
+                <DropZone />
+              </div>
             </div>
-          ))}
+          </div>
         </div>
-      </main>
-
-      {/* Footer section */}
-      <footer className="bg-gray-800 text-white mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <p className="text-center">&copy; 2024 Your Company. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
+      </DndProvider>
+    </Provider>
   );
 }
 
