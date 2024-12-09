@@ -1,29 +1,32 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface DragDropState {
-  draggedItem: string | null;
+  draggedItems: string[];
   droppedItems: string[];
+  selectedItems: string[];
 }
 
 const initialState: DragDropState = {
-  draggedItem: null,
+  draggedItems: [],
   droppedItems: [],
+  selectedItems: [],
 };
 
 export const dragDropSlice = createSlice({
   name: 'dragDrop',
   initialState,
   reducers: {
-    // Set the currently dragged item
-    setDraggedItem: (state, action: PayloadAction<string | null>) => {
-      state.draggedItem = action.payload;
+    setDraggedItems: (state, action: PayloadAction<string[]>) => {
+      state.draggedItems = action.payload;
     },
-    // Add item to dropped items list
     addDroppedItem: (state, action: PayloadAction<string>) => {
       state.droppedItems.push(action.payload);
+    },
+    setSelectedItems: (state, action: PayloadAction<string[]>) => {
+      state.selectedItems = action.payload;
     },
   },
 });
 
-export const { setDraggedItem, addDroppedItem } = dragDropSlice.actions;
+export const { setDraggedItems, addDroppedItem, setSelectedItems } = dragDropSlice.actions;
 export default dragDropSlice.reducer;
